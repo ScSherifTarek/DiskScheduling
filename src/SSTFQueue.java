@@ -22,7 +22,6 @@ public class SSTFQueue implements SchedulingQueue {
 
 	@Override
 	public void init(ArrayList<Integer> arr) {
-		// TODO Auto-generated method stub
 		for(int i=0;i<arr.size();i++)
 			this.arr.add(arr.get(i));
 	}

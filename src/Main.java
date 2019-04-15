@@ -17,6 +17,7 @@ public class Main {
         data.add(65);
         data.add(67);
         
+        SchedulingQueue x = new CLookQueue(data);
 		SchedulingQueue f = new FCFSQueue(data);
 		int distance = doAlgo(f, 53);
         System.out.println();
