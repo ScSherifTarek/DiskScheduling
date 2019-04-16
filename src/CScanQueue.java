@@ -1,33 +1,53 @@
 import java.util.ArrayList;
 
-public class CLookQueue implements SchedulingQueue {
+public class CScanQueue implements SchedulingQueue {
 	
 	ArrayList<Integer> arr = new ArrayList<>();
 	Boolean toRight = false;
 	final int DISK_SIZE = 199;
 	int totalHead = 0;
 	
-	CLookQueue(){}
-	CLookQueue(ArrayList<Integer> arr)
+	CScanQueue(){}
+	CScanQueue(ArrayList<Integer> arr)
     {
     	init(arr);
     }
 	
 	@Override
 	public int pop(int headPos) {
+//		return getMyIndex(headPos);
 		if(arr.size()<=0)
 			return -1;
 		
 		int index = getMyIndex(headPos);
 		if(index >= this.arr.size() || index < 0)
 		{
-			toRight = !toRight;
-			return pop(0);
+			totalHead += DISK_SIZE;
+			if(toRight)
+			{
+				totalHead += Math.abs(DISK_SIZE - headPos);
+				return pop(0);
+			}
+			else
+			{
+				totalHead += headPos;
+				return pop(DISK_SIZE);
+			}		
+		}
+		else if(index == 0 && !toRight && this.arr.size() > 1 )
+		{
+			int e = arr.get(index);
+			arr.remove(index);
+			totalHead += Math.abs(headPos - e);
+			
+			totalHead += e;
+			return DISK_SIZE;
 		}
 		else
 		{
 			int e = arr.get(index);
 			arr.remove(index);
+			totalHead += Math.abs(headPos - e);
 			return e;
 		}
 	}
@@ -37,6 +57,7 @@ public class CLookQueue implements SchedulingQueue {
 		for(int i=0;i<arr.size();i++)
 			this.arr.add(arr.get(i));
 		this.arr.sort(null);
+//		System.out.println(this.arr);
 	}
 	
 	@Override
@@ -48,7 +69,6 @@ public class CLookQueue implements SchedulingQueue {
         		break;
         	
         	System.out.print(i+", ");
-        	this.totalHead += Math.abs(head-i);
         	head = i;
         }
 		return this.totalHead;
@@ -63,13 +83,16 @@ public class CLookQueue implements SchedulingQueue {
 			i = 0;
 			while(i<arr.size() && head>this.arr.get(i))
 				i++;
-
 		}
 		else
 		{
+			System.out.println(this.arr);
+			System.out.println(head);
 			i = arr.size()-1;
 			while(i>0 && head<this.arr.get(i))
 				i--;
+			
+			System.out.println(i);
 		}
 		return i;
 	}

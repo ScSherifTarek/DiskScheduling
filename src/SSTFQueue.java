@@ -42,4 +42,23 @@ public class SSTFQueue implements SchedulingQueue {
 		}
 		return index;
 	}
+	
+	@Override
+	public int run(int head) {
+		int distance = 0;
+        
+        while(true)
+        {
+        	int i = this.pop(head);
+        	if(i == -1)
+        		break;
+        	
+        	System.out.print(i+", ");
+        	distance += Math.abs(head-i);
+        	head = i;
+        }
+		return distance;
+	}
+	
+	
 }

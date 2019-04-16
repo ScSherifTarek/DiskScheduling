@@ -17,35 +17,40 @@ public class Main {
         data.add(65);
         data.add(67);
         
-        SchedulingQueue x = new CLookQueue(data);
-		SchedulingQueue f = new FCFSQueue(data);
-		int distance = doAlgo(f, 53);
+        SchedulingQueue x = new CScanQueue(data);
+        int dis = x.run(53);
         System.out.println();
-        System.out.println(distance);
-
-        System.out.println();
-        System.out.println("SSTF:");
-        f = new SSTFQueue(data);
+        System.out.println(dis);
         
-        distance = doAlgo(f,53);
-        System.out.println();
-        System.out.println(distance);
+//       
+//		SchedulingQueue f = new FCFSQueue(data);
+//		int distance = f.run(53);
+//        System.out.println();
+//        System.out.println(distance);
+//
+//        System.out.println();
+//        System.out.println("SSTF:");
+//        f = new SSTFQueue(data);
+//        
+//        distance =  f.run(53);
+//        System.out.println();
+//        System.out.println(distance);
 
 	}
 
-	private static int doAlgo(SchedulingQueue f,int head) {
-        int distance = 0;
-        
-        while(true)
-        {
-        	int i = f.pop(head);
-        	if(i == -1)
-        		break;
-        	
-        	System.out.print(i+", ");
-        	distance += Math.abs(head-i);
-        	head = i;
-        }
-		return distance;
-	}
+//	private static int doAlgo(SchedulingQueue f,int head) {
+//        int distance = 0;
+//        
+//        while(true)
+//        {
+//        	int i = f.pop(head);
+//        	if(i == -1)
+//        		break;
+//        	
+//        	System.out.print(i+", ");
+//        	distance += Math.abs(head-i);
+//        	head = i;
+//        }
+//		return distance;
+//	}
 }
