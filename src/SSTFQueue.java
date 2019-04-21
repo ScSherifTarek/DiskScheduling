@@ -53,10 +53,11 @@ public class SSTFQueue implements SchedulingQueue {
         	if(i == -1)
         		break;
         	
-        	System.out.print(i+", ");
+        	System.out.print(i+" --> ");
         	distance += Math.abs(head-i);
         	head = i;
         }
+		System.out.print("||");
 		return distance;
 	}
 	

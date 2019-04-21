@@ -50,6 +50,7 @@ public class OptimizedRealTimeQueue implements SchedulingQueue {
             head = i;
             this.towardsHead-- ;
         }
+        System.out.print("||");
         return distance ;
     }
 }
