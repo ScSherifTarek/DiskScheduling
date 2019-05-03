@@ -22,7 +22,6 @@ public class SSTFQueue implements SchedulingQueue {
 
 	@Override
 	public void init(ArrayList<Integer> arr) {
-		// TODO Auto-generated method stub
 		for(int i=0;i<arr.size();i++)
 			this.arr.add(arr.get(i));
 	}
@@ -43,4 +42,24 @@ public class SSTFQueue implements SchedulingQueue {
 		}
 		return index;
 	}
+	
+	@Override
+	public int run(int head) {
+		int distance = 0;
+        
+        while(true)
+        {
+        	int i = this.pop(head);
+        	if(i == -1)
+        		break;
+        	
+        	System.out.print(i+" --> ");
+        	distance += Math.abs(head-i);
+        	head = i;
+        }
+		System.out.print("||");
+		return distance;
+	}
+	
+	
 }
